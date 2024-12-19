@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/gateway/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/gateway/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/gateway",
+  "projects": {
+    "gateway": {
+      "type": "application",
+      "root": "apps/gateway",
+      "entryFile": "main",
+      "sourceRoot": "apps/gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/gateway/tsconfig.app.json"
+      }
+    },
+    "account-app": {
+      "type": "application",
+      "root": "apps/account-app",
+      "entryFile": "main",
+      "sourceRoot": "apps/account-app/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/account-app/tsconfig.app.json"
+      }
+    },
+    "images-app": {
+      "type": "application",
+      "root": "apps/images-app",
+      "entryFile": "main",
+      "sourceRoot": "apps/images-app/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/images-app/tsconfig.app.json"
+      }
+    },
+    "cart-app": {
+      "type": "application",
+      "root": "apps/cart-app",
+      "entryFile": "main",
+      "sourceRoot": "apps/cart-app/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/cart-app/tsconfig.app.json"
+      }
+    },
+    "missions-app": {
+      "type": "application",
+      "root": "apps/missions-app",
+      "entryFile": "main",
+      "sourceRoot": "apps/missions-app/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/missions-app/tsconfig.app.json"
+      }
+    }
+  }
+}
