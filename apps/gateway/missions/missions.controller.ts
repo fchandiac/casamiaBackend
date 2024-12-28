@@ -11,6 +11,11 @@ export class MissionsController {
     @Inject('ACCOUNT_SERVICE') private readonly accountClient: ClientProxy,
   ) {}
 
+  @Get('health')
+  async health(): Promise<string> {
+    return 'Auth Gateway Service is healthy';
+  }
+
   @Get('MicroserviceHealth')
   async microServiceHealth(): Promise<string> {
     //@ts-ignore
@@ -83,15 +88,8 @@ export class MissionsController {
     }
   }
 
-    @Get('findOneById')
-    async findOneById(
-      @Query('id') id: string,
-    ): Promise<any> {
-      return this.client.send(
-        { cmd: 'missions-find-one-by-id' },
-        { id },
-      );
-    }
-
-
+  @Get('findOneById')
+  async findOneById(@Query('id') id: string): Promise<any> {
+    return this.client.send({ cmd: 'missions-find-one-by-id' }, { id });
+  }
 }
