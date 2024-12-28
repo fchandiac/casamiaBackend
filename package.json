@@ -7,6 +7,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "dev:all": "nest start gateway --watch & nest start account-app --watch & nest start cart-app --watch & nest start missions-app --watch",
+    "build:all": "nest build gateway && nest build account-app && nest build cart-app && nest build missions-app",
+    "start:all": "node dist/apps/gateway/main & node dist/apps/account-app/main & node dist/apps/cart-app/main & node dist/apps/missions-app/main",
     "build": "nest build",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
