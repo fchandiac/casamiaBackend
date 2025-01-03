@@ -63,6 +63,14 @@ export class MissionsAppService {
     return find;
   }
 
+  async updateMissionStatus(id: string, status: number): Promise<Mission> {
+    const mission = await this.missionRepository.findOneBy({ id });
+    mission.status = status;
+    return this.missionRepository.save(mission);
+  }
+
+
+
   
   
 }

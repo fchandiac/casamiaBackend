@@ -4,6 +4,7 @@ import { Account } from 'libs/entities/account/account.entity';
 import { RpcException } from '@nestjs/microservices';
 import { QueryFailedError, Repository } from 'typeorm';
 import { CreateAccountDto } from 'libs/dtos/account/create-account.dto';
+import { UpdateMoneyPointsDto } from 'libs/dtos/account/update-money-points-dto';
 import moment from 'moment';
 
 enum Gender {
@@ -186,7 +187,7 @@ export class AccountAppService {
           message: 'Account not found',
         });
       }
-      account.clp += clp;
+      account.money += clp;
       await this.accountRepository.save(account);
       return account;
     } catch (error) {
@@ -206,6 +207,28 @@ export class AccountAppService {
       }
     }
   }
+
+
+  async updateMoneyAndPoints( dto: UpdateMoneyPointsDto): Promise<Account> {
+    try {
+      const account = await this.accountRepository.findOneBy({ email: dto.email });
+      if (!account) {
+        throw new RpcException({
+          statusCode: 404,
+          message: 'Account not found',
+        });
+      }
+      account.money += dto.money;
+      account.points += dto.points;
+      await this.accountRepository.save(account);
+      return account;
+    } catch (error) {
+      if (error instanceof RpcException) {
+        throw error;
+      }
+    }
+  }
+  
 }
 
 

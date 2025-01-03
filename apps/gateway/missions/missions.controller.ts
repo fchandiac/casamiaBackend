@@ -2,6 +2,8 @@ import { Body, Controller, Get, Inject, Post, Query } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { CreateMissionDto } from '../../../libs/dtos/missions/create-mission-dto';
 import { CreateOneMissionDto } from 'libs/dtos/missions/create-one-mission-dto';
+import { ValidateMissionDto } from 'libs/dtos/missions/validate-mission-dto';
+import { UpdateMoneyPointsDto } from 'libs/dtos/account/update-money-points-dto';
 
 @Controller('missions')
 export class MissionsController {
@@ -92,4 +94,21 @@ export class MissionsController {
   async findOneById(@Query('id') id: string): Promise<any> {
     return this.client.send({ cmd: 'missions-find-one-by-id' }, { id });
   }
+
+  @Post('validateMission')
+  async validateMission(@Body() mission: ValidateMissionDto): Promise<any> {
+
+
+    const updateData = new UpdateMoneyPointsDto();
+    updateData.email = mission.email;
+    updateData.money = mission.money;
+    updateData.points = mission.points;
+
+
+    const updateAccount = await this.accountClient.send({ cmd: 'update-money-points' }, updateData).toPromise();
+
+    return updateAccount;
+    
+  }
+
 }

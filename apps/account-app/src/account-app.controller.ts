@@ -67,4 +67,15 @@ export class AccountAppController {
       throw new RpcException(error.message);
     }
   }
+
+
+
+  @MessagePattern({ cmd: 'update-money-points' })
+  async updateMoneyAndPoints(@Payload() dto: any, @Ctx() context: RmqContext): Promise<any> {
+    try {
+      return this.accountAppService.updateMoneyAndPoints(dto);
+    } catch (error) {
+      throw new RpcException(error.message);
+    }
+  }
 }

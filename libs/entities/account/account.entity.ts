@@ -31,8 +31,8 @@ export class Account {
   @Column({ type: 'int', default: 0 })
   points: number; // Puntos de la cuenta
 
-  @Column({ type: 'decimal', default: 0 })
-  clp: number; // Saldo en pesos chilenos
+  @Column({ type: 'int', default: 0 })
+  money: number; // Saldo en pesos chilenos
 
   @DeleteDateColumn()
   deletedAt: Date; // Columna que almacena la fecha de eliminación lógica

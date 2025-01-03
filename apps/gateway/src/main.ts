@@ -6,11 +6,11 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const logger = new Logger('Gateway');
   const app = await NestFactory.create(AppModule);
-  const port = envs.gateway.port;
+  const port = envs.gateway.port;  // Aquí defines el puerto como 3001
 
   // Configurar CORS
   app.enableCors({
-    origin: 'http://localhost:8081', // Permitir solo el frontend
+    origin: '*', // Permitir solo el frontend
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Permitir cookies si es necesario
   });
@@ -21,7 +21,7 @@ async function bootstrap() {
     transform: true,
   }));
 
-  await app.listen(port);
+  await app.listen(port); // Levanta la aplicación en el puerto 3001
   logger.log(`Gateway started at http://localhost:${port}`);
 }
 bootstrap();

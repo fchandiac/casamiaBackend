@@ -33,7 +33,7 @@ export class Mission {
   @Column()
   money: number;
 
-  @Column()
+  @Column({ default: 'https://www.somoselcafe.com.ar/img/novedades/9.webp' })
   imageUrl: string;
 
   @CreateDateColumn({ type: 'timestamp' })
