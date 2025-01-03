@@ -2,11 +2,15 @@ import { NestFactory } from '@nestjs/core';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { envs } from 'libs/config';
 import { AppModule } from './app.module';
+import { CustomWebSocketGateway } from '../websocket/websocket.gateway';
 
 async function bootstrap() {
   const logger = new Logger('Gateway');
   const app = await NestFactory.create(AppModule);
   const port = envs.gateway.port;  // Aquí defines el puerto como 3001
+
+  const server = app.getHttpServer();
+  new CustomWebSocketGateway() // Escucha en el servidor HTTP
 
   // Configurar CORS
   app.enableCors({
