@@ -211,7 +211,7 @@ export class AccountAppService {
 
   async updateMoneyAndPoints( dto: UpdateMoneyPointsDto): Promise<Account> {
     try {
-      const account = await this.accountRepository.findOneBy({ email: dto.email });
+      const account = await this.accountRepository.findOneBy({ id: dto.id });
       if (!account) {
         throw new RpcException({
           statusCode: 404,

@@ -51,6 +51,21 @@ export class MissionsAppController {
     const mission = await this.missionsAppService.findOneById(id);
     return mission;
   }
+
+
+  // async updateMissionStatus(id: string, status: number): Promise<Mission> 
+  @MessagePattern({ cmd: 'missions-update-mission-status' })
+  async updateMissionStatus(
+    @Payload() data: any,
+    @Ctx() context: RmqContext,
+  ): Promise<any> {
+    const mission = await this.missionsAppService.updateMissionStatus(
+      data.id,
+      data.status,
+    );
+    return mission;
+  }
+  
 }
 
 //save

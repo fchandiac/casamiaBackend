@@ -95,19 +95,30 @@ export class MissionsController {
     return this.client.send({ cmd: 'missions-find-one-by-id' }, { id });
   }
 
+
   @Post('validateMission')
   async validateMission(@Body() mission: ValidateMissionDto): Promise<any> {
+    console.log('validateMission', mission);
 
+    const findMission = await this.client.send({ cmd: 'missions-find-one-by-id' }, { id: mission.id }).toPromise();
+
+    const missionId = findMission.id;
+    const accountId = findMission.accountId;
+
+    const updateMisisionStatus = await this.client.send({ cmd: 'missions-update-mission-status' }, { id: missionId, status: 1 }).toPromise();
+
+  // @MessagePattern({ cmd: 'update-money-points' })
 
     const updateData = new UpdateMoneyPointsDto();
-    updateData.email = mission.email;
-    updateData.money = mission.money;
-    updateData.points = mission.points;
-
+    updateData.money = findMission.money;
+    updateData.points = findMission.points;
+    updateData.id = accountId;
 
     const updateAccount = await this.accountClient.send({ cmd: 'update-money-points' }, updateData).toPromise();
 
-    return updateAccount;
+    console.log('updateAccount', updateAccount);
+
+    return findMission;
     
   }
 
