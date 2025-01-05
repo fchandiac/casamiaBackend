@@ -1,5 +1,5 @@
 import { Controller} from '@nestjs/common';
-import { AccountAppService } from './account-app.service';
+import { AccountAppService } from './account.service';
 import {
   MessagePattern,
   Payload,

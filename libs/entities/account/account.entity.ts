@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, DeleteDateColumn, IntegerType } from 'typeorm';
-
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, DeleteDateColumn } from 'typeorm';
+import { Transaction } from 'libs/entities/account/transaction.entity';
 
 @Entity('accounts')
 export class Account {
@@ -18,12 +18,11 @@ export class Account {
   @Column({ type: 'varchar', length: 100, unique: true })
   email: string; // Correo electrónico del usuario
 
-  @Column({type: 'int', default: 0})
+  @Column({ type: 'int', default: 0 })
   role: number; // Rol del usuario
 
-  @Column({type: 'int', default: 0})
+  @Column({ type: 'int', default: 0 })
   gender: number; // Género del usuario
-
 
   @Column({ type: 'date', nullable: true })
   birthday: Date; // Fecha de nacimiento del usuario
@@ -33,6 +32,9 @@ export class Account {
 
   @Column({ type: 'int', default: 0 })
   money: number; // Saldo en pesos chilenos
+
+  @OneToMany(() => Transaction, (transaction) => transaction.account)
+  transactions: Transaction[]; // Relación con las transacciones
 
   @DeleteDateColumn()
   deletedAt: Date; // Columna que almacena la fecha de eliminación lógica

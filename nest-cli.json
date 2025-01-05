@@ -54,6 +54,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/missions-app/tsconfig.app.json"
       }
+    },
+    "notifications-app": {
+      "type": "application",
+      "root": "apps/notifications-app",
+      "entryFile": "main",
+      "sourceRoot": "apps/notifications-app/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/notifications-app/tsconfig.app.json"
+      }
     }
   }
 }
